@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/26/17 11:45 AM
+ * Created by Mong Ramos Jr. on 8/26/17 9:33 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 11:19 AM
+ * Last modified 8/26/17 5:08 PM
  */
 
 apply plugin: 'com.android.application'
@@ -34,11 +34,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.bumptech.glide:glide:4.0.0'
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.android.support:gridlayout-v7:26.0.0-alpha1'
     compile 'com.android.support:cardview-v7:26.0.0-alpha1'
+    testCompile 'junit:junit:4.12'
 }

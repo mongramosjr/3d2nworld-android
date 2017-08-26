@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 3:19 PM
+ * Last modified 8/26/17 3:38 PM
  */
 
 package com.brainbox.a3d2nworld.adapter;
@@ -21,66 +21,51 @@ import android.widget.TextView;
 import android.util.TypedValue;
 
 import com.brainbox.a3d2nworld.R;
-import com.brainbox.a3d2nworld.model.Resort;
+import com.brainbox.a3d2nworld.model.Deal;
 import com.bumptech.glide.Glide;
 import java.util.List;
 
-public class ResortsRecyclerAdapter extends RecyclerView.Adapter<ResortsRecyclerAdapter.ResortViewHolder> {
+public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdapter.DealViewHolder> {
 
     private Context mContext;
-    private List<Resort> resortList;
+    private List<Deal> dealList;
 
-    public class ResortViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, shortDesc;
-        public TextView likes;
+    public class DealViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, htmlDesc;
         public TextView amount;
         public ImageView thumbnail;
 
-        private int resort_label_height;
-        //public ImageView resortMenu;
 
-        public ResortViewHolder(View view) {
+        public DealViewHolder(View view) {
             super(view);
-            title = view.findViewById(R.id.resort_title);
-            shortDesc = view.findViewById(R.id.resort_shortDesc);
-            amount = view.findViewById(R.id.resort_amount);
-            likes = view.findViewById(R.id.resort_likes);
-            thumbnail = view.findViewById(R.id.resort_thumbnail);
+            title = view.findViewById(R.id.deal_title);
+            amount = view.findViewById(R.id.deal_amount);
+            thumbnail = view.findViewById(R.id.deal_thumbnail);
 
-            resort_label_height = view.findViewById(R.id.resort_label_view).getLayoutParams().height;
         }
     }
 
 
-    public ResortsRecyclerAdapter(Context mContext, List<Resort> resortList) {
+    public DealsRecyclerAdapter(Context mContext, List<Deal> dealList) {
         this.mContext = mContext;
-        this.resortList = resortList;
+        this.dealList = dealList;
     }
 
     @Override
-    public ResortViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DealViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.resorts_content_card_fullscreen, parent, false);
-        return new ResortViewHolder(itemView);
+                .inflate(R.layout.deals_content_card_view, parent, false);
+        return new DealViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final ResortViewHolder holder, int position) {
-        Resort resort = resortList.get(position);
-        holder.title.setText(resort.getName());
-        holder.shortDesc.setText(resort.getShortDesc());
-        holder.likes.setText(String.valueOf(resort.getLikes()));
-        holder.amount.setText(String.valueOf(resort.getAmount()));
-
-
-
-        int height = mContext.getResources().getDisplayMetrics().heightPixels;
-        holder.title.setText(java.lang.String.valueOf(holder.resort_label_height));
-        holder.thumbnail.getLayoutParams().height = height  - dpToPx(holder.resort_label_height);
-        holder.thumbnail.requestLayout();
+    public void onBindViewHolder(final DealViewHolder holder, int position) {
+        Deal deal = dealList.get(position);
+        holder.title.setText(deal.getName());
+        holder.amount.setText(String.valueOf(deal.getAmount()));
 
         // loading album cover using Glide library
-        Glide.with(mContext).load(resort.getThumbnail()).into(holder.thumbnail);
+        Glide.with(mContext).load(deal.getThumbnail()).into(holder.thumbnail);
 
         //holder.resortMenu.setOnClickListener(new View.OnClickListener() {
         //    @Override
@@ -127,11 +112,12 @@ public class ResortsRecyclerAdapter extends RecyclerView.Adapter<ResortsRecycler
 
     @Override
     public int getItemCount() {
-        return resortList.size();
+        return dealList.size();
     }
 
     private int dpToPx(int dp) {
 
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.getResources().getDisplayMetrics()));
     }
+
 }

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/26/17 11:45 AM
+  ~ Created by Mong Ramos Jr. on 8/26/17 9:33 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/26/17 10:15 AM
+  ~ Last modified 8/26/17 3:19 PM
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/card_view_fullscreen"
+        android:id="@+id/resorts_card_view_fullscreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -26,7 +26,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/thumbnail"
+                android:id="@+id/resort_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -44,7 +44,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/title"
+                    android:id="@+id/resort_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/resort_title"
@@ -54,7 +54,7 @@
                     android:paddingTop="@dimen/resort_title_padding_top"
                     android:textSize="@dimen/resort_title" />
                 <TextView
-                    android:id="@+id/shortDesc"
+                    android:id="@+id/resort_shortDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/resort_title_padding_top"
@@ -62,7 +62,7 @@
                     android:paddingRight="@dimen/resort_title_padding"
                     android:textSize="@dimen/resort_title" />
                 <TextView
-                    android:id="@+id/amount"
+                    android:id="@+id/resort_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/resort_title_padding_top"
@@ -70,7 +70,7 @@
                     android:paddingRight="@dimen/resort_title_padding"
                     android:textSize="@dimen/resort_title" />
                 <TextView
-                    android:id="@+id/likes"
+                    android:id="@+id/resort_likes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/resort_title_padding_bottom"

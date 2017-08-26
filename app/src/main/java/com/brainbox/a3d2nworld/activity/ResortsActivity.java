@@ -1,18 +1,22 @@
 /*
- * Created by Mong Ramos Jr. on 8/26/17 11:45 AM
+ * Created by Mong Ramos Jr. on 8/26/17 9:33 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 10:12 AM
+ * Last modified 8/26/17 9:28 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -36,8 +40,7 @@ import com.brainbox.a3d2nworld.model.Resort;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class ResortsActivity extends BaseDrawerActivity {
 
 
     private RecyclerView recyclerView;
@@ -48,8 +51,17 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_activity);
-        //setContentView(R.layout.home_main_view);
+
+        //setContentView(R.layout.resorts_activity);
+
+        //include
+        // inflate content layout and add it to the relative layout as first child
+        // add as first child, therefore pass index 1 (0,1,...)
+
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) View.inflate(this,
+                R.layout.resorts_main_view, null);
+        drawerLayout.addView(coordinatorLayout, 0);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         toolbar.setLogo(R.drawable.toolbar_3d2n);
         toolbar.setTitle("");
@@ -65,17 +77,18 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.home_drawer_layout);
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.resorts_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //moved to baseDrawerActivity
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.resort_recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.resorts_recycler_view);
         resortList = new ArrayList<>();
         resortAdapter = new ResortsRecyclerAdapter(this, resortList);
 
@@ -88,7 +101,7 @@ public class HomeActivity extends AppCompatActivity
         recyclerView.setAdapter(resortAdapter);
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.resorts_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -96,63 +109,10 @@ public class HomeActivity extends AppCompatActivity
             }
         });
 
-        //prepareResorts();
+        prepareResorts();
 
 
     }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.home_drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_cart) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_resorts) {
-            // Handle the camera action
-        } else if (id == R.id.nav_deals) {
-
-        } else if (id == R.id.nav_newsletter) {
-
-        }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.home_drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
 
     /**
      * Adding few albums for testing
