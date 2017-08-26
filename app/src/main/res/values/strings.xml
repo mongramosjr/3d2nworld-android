@@ -1,0 +1,28 @@
+<!--
+  ~ Created by Mong Ramos Jr. on 8/26/17 11:45 AM
+  ~
+  ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
+  ~
+  ~ Last modified 8/26/17 10:25 AM
+  -->
+
+<resources>
+    <string name="app_name">3d2nworld</string>
+    <string name="title_activity_home">3D2NWorld</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="name_resort">Resort Name</string>
+    <string name="name_user">User</string>
+    <string name="developer_name">Mong Ramos Jr.</string>
+    <string name="developer_email">mongramosjr@gmail.com</string>
+
+    <string name="action_cart">Cart</string>
+
+    <string name="title_resorts">Resorts</string>
+    <string name="title_deals">Deals</string>
+    <string name="title_newsletter">Newsletter</string>
+
+
+</resources>
