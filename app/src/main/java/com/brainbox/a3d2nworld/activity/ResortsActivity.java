@@ -1,22 +1,18 @@
 /*
- * Created by Mong Ramos Jr. on 8/26/17 9:33 PM
+ * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 9:28 PM
+ * Last modified 8/27/17 10:14 AM
  */
 
 package com.brainbox.a3d2nworld.activity;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -25,16 +21,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.adapter.ResortsRecyclerAdapter;
+import com.brainbox.a3d2nworld.base.BaseDrawerActivity;
 import com.brainbox.a3d2nworld.model.Resort;
 
 import java.util.ArrayList;
@@ -52,23 +45,35 @@ public class ResortsActivity extends BaseDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //setContentView(R.layout.resorts_activity);
+        setContentView(R.layout.resorts_activity);
 
         //include
         // inflate content layout and add it to the relative layout as first child
         // add as first child, therefore pass index 1 (0,1,...)
 
-        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) View.inflate(this,
-                R.layout.resorts_main_view, null);
-        drawerLayout.addView(coordinatorLayout, 0);
+        //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) View.inflate(this,
+        //        R.layout.resorts_main_view, null);
+        //drawerLayout.addView(coordinatorLayout, 0);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        //toolbar
+        toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         toolbar.setLogo(R.drawable.toolbar_3d2n);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
+        //drawer layout
+        drawerLayout = (DrawerLayout) findViewById(R.id.resorts_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //drawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        //navigation view
+        NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.deal_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,17 +81,6 @@ public class ResortsActivity extends BaseDrawerActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.resorts_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        //moved to baseDrawerActivity
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
-        //navigationView.setNavigationItemSelectedListener(this);
-
 
         recyclerView = (RecyclerView) findViewById(R.id.resorts_recycler_view);
         resortList = new ArrayList<>();

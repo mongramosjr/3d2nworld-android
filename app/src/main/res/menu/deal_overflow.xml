@@ -1,0 +1,21 @@
+<!--
+  ~ Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+  ~
+  ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
+  ~
+  ~ Last modified 8/27/17 10:38 AM
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/action_view_more_info"
+        android:orderInCategory="100"
+        android:title="@string/action_more_info" />
+
+    <item
+        android:id="@+id/action_add_deal_cart"
+        android:orderInCategory="101"
+        android:title="@string/action_add_to_cart" />
+</menu>

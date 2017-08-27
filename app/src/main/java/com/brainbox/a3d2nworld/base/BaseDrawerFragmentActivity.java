@@ -1,64 +1,62 @@
 /*
- * Created by Mong Ramos Jr. on 8/26/17 9:33 PM
+ * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 9:25 PM
+ * Last modified 8/27/17 10:14 AM
  */
 
-package com.brainbox.a3d2nworld.activity;
+package com.brainbox.a3d2nworld.base;
 
-import android.content.Intent;
-import android.support.design.widget.CoordinatorLayout;
+import android.annotation.SuppressLint;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 
 import com.brainbox.a3d2nworld.R;
-import com.brainbox.a3d2nworld.adapter.DealsRecyclerAdapter;
+import com.brainbox.a3d2nworld.fragment.DealsFragment;
+import com.brainbox.a3d2nworld.fragment.ResortsFragment;
 
-public class BaseDrawerActivity extends AppCompatActivity
+@SuppressLint("Registered")
+public class BaseDrawerFragmentActivity extends AppCompatActivity
             implements NavigationView.OnNavigationItemSelectedListener{
 
 
-    DrawerLayout drawerLayout;
-    NavigationView navigationView;
+    public DrawerLayout drawerLayout;
+    public NavigationView navigationView;
+    public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //content
-        super.setContentView(R.layout.base_drawer_activity);
+        //super.setContentView(R.layout.base_drawer_activity);
 
         //toolbar
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        //toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         //toolbar.setLogo(R.drawable.toolbar_3d2n);
         //toolbar.setTitle("");
         //setSupportActionBar(toolbar);
 
         //drawer layout
-        drawerLayout = (DrawerLayout) findViewById(R.id.base3d2n_drawer_layout);
+        //drawerLayout = (DrawerLayout) findViewById(R.id.base3d2n_drawer_layout);
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
         //        this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //drawerLayout.setDrawerListener(toggle);
         //toggle.syncState();
 
         //navigation view
-        NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
+        //navigationView.setNavigationItemSelectedListener(this);
 
 
     }
@@ -99,7 +97,11 @@ public class BaseDrawerActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         int id = item.getItemId();
+
+        Fragment fragment = null;
+        Class fragmentClass;
 
         //to prevent current item select over and over
         if (item.isChecked()) {
@@ -107,39 +109,51 @@ public class BaseDrawerActivity extends AppCompatActivity
             return false;
         }
 
-        if (id == R.id.nav_resorts) {
 
-            Intent intent = new Intent(this, ResortsActivity.class);
-            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-            ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
 
-            //LayoutInflater inflater = getLayoutInflater();
-            //LinearLayout container = (LinearLayout) findViewById(R.id.main_view);
-            //inflater.inflate(R.layout.resorts_main_view, container);
 
-        } else if (id == R.id.nav_deals) {
-
-            Intent intent = new Intent(this, DealsActivity.class);
-            ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
-            ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
-
-            //LayoutInflater inflater = getLayoutInflater();
-            //LinearLayout container = (LinearLayout) findViewById(R.id.main_view);
-            //inflater.inflate(R.layout.deals_main_view, container);
-
-        } else if (id == R.id.nav_newsletter) {
-
+		switch(id) {
+			case R.id.nav_resorts:
+				//-- using Linearlayout
+				//LayoutInflater inflater = getLayoutInflater();
+				//LinearLayout container = (LinearLayout) findViewById(R.id.main_view);
+				//inflater.inflate(R.layout.resorts_main_view, container);
+				
+				//-- using fragment
+				fragmentClass = ResortsFragment.class;
+				
+				break;
+				
+			case R.id.nav_deals:
+				//-- using Linearlayout
+				//LayoutInflater inflater = getLayoutInflater();
+				//LinearLayout container = (LinearLayout) findViewById(R.id.main_view);
+				//inflater.inflate(R.layout.deals_main_view, container);
+				
+				//-- using fragment
+				fragmentClass = DealsFragment.class;
+				
+				break;
+			
+			case R.id.nav_newsletter:
+				
+				fragmentClass = DealsFragment.class;
+				break;
+				
+			default:
+				fragmentClass = DealsFragment.class;
+			
+		}
+		
+		//-- using fragment
+        try {
+			fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-//        try {
-//            fragment = (Fragment) fragmentClass.newInstance();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-//        // Insert the fragment by replacing any existing fragment
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.deal_coordinator_layout, fragment).commit();
 
 
         // Highlight the selected item has been done by NavigationView

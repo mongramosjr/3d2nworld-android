@@ -1,20 +1,16 @@
 /*
- * Created by Mong Ramos Jr. on 8/26/17 9:33 PM
+ * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 9:26 PM
+ * Last modified 8/27/17 2:28 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
 
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -23,25 +19,21 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import android.view.LayoutInflater;
+import android.widget.Toast;
 
 
 import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.adapter.DealsRecyclerAdapter;
+import com.brainbox.a3d2nworld.base.BaseDrawerActivity;
 import com.brainbox.a3d2nworld.model.Deal;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealsActivity extends BaseDrawerActivity {
+public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAdapter.DealsAdapterListener {
 
     private RecyclerView recyclerView;
     private DealsRecyclerAdapter dealAdapter;
@@ -53,31 +45,36 @@ public class DealsActivity extends BaseDrawerActivity {
         super.onCreate(savedInstanceState);
 
         //content
-        //setContentView(R.layout.base_drawer_activity);
+        setContentView(R.layout.deals_activity);
 
         //include
         // inflate content layout and add it to the relative layout as first child
         // add as first child, therefore pass index 1 (0,1,...)
 
-        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) View.inflate(this,
-                R.layout.deals_main_view, null);
-        drawerLayout.addView(coordinatorLayout, 0);
+        //CoordinatorLayout coordinatorLayout = (CoordinatorLayout) View.inflate(this,
+        //        R.layout.deals_main_view, null);
+        //drawerLayout.addView(coordinatorLayout, 0);
 
         //toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        toolbar = (Toolbar) findViewById(R.id.home_toolbar);
         toolbar.setLogo(R.drawable.toolbar_3d2n);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
-
+        //drawer layout
+        drawerLayout = (DrawerLayout) findViewById(R.id.deals_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
+        //navigation view
+        NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         recyclerView = (RecyclerView) findViewById(R.id.deals_recycler_view);
         dealList = new ArrayList<>();
-        dealAdapter = new DealsRecyclerAdapter(this, dealList);
+        dealAdapter = new DealsRecyclerAdapter(this, dealList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,2, LinearLayoutManager.VERTICAL, false);
         //RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);
@@ -174,6 +171,34 @@ public class DealsActivity extends BaseDrawerActivity {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    @Override
+    public void onShoppingCartClicked(int position) {
+        Deal deal = dealList.get(position);
+        Toast.makeText(this.getBaseContext(), "Read: IconClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onThumbnailClicked(int position) {
+        // Star icon is clicked,
+        // mark the message as important
+        Deal deal = dealList.get(position);
+        Toast.makeText(this.getBaseContext(), "Read: IconImportantClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDealRowClicked(int position) {
+        Deal deal = dealList.get(position);
+        Toast.makeText(this.getBaseContext(), "Read: RowClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onDealRowLongClicked(int position) {
+        // long press is performed, enable action mode
+        Deal deal = dealList.get(position);
+        Toast.makeText(this.getBaseContext(), "Read: LongClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
     }
 
 }

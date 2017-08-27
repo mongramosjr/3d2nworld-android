@@ -1,21 +1,21 @@
 /*
- * Created by Mong Ramos Jr. on 8/26/17 9:33 PM
+ * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 3:38 PM
+ * Last modified 8/27/17 4:54 PM
  */
 
 package com.brainbox.a3d2nworld.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import android.util.TypedValue;
@@ -29,11 +29,13 @@ public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdap
 
     private Context mContext;
     private List<Deal> dealList;
+    private DealsAdapterListener listener;
 
-    public class DealViewHolder extends RecyclerView.ViewHolder {
+    public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
         public TextView title, htmlDesc;
         public TextView amount;
-        public ImageView thumbnail;
+        public ImageView thumbnail, addShoppingCart;
+        RelativeLayout dealContainer;
 
 
         public DealViewHolder(View view) {
@@ -41,14 +43,24 @@ public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdap
             title = view.findViewById(R.id.deal_title);
             amount = view.findViewById(R.id.deal_amount);
             thumbnail = view.findViewById(R.id.deal_thumbnail);
+            addShoppingCart = view.findViewById(R.id.deal_add_shopping_cart);
+            dealContainer = view.findViewById(R.id.deal_container);
+            view.setOnLongClickListener(this);
+        }
 
+        @Override
+        public boolean onLongClick(View view) {
+            listener.onDealRowLongClicked(getAdapterPosition());
+            view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+            return true;
         }
     }
 
 
-    public DealsRecyclerAdapter(Context mContext, List<Deal> dealList) {
+    public DealsRecyclerAdapter(Context mContext, List<Deal> dealList, DealsAdapterListener listener) {
         this.mContext = mContext;
         this.dealList = dealList;
+        this.listener = listener;
     }
 
     @Override
@@ -62,52 +74,13 @@ public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdap
     public void onBindViewHolder(final DealViewHolder holder, int position) {
         Deal deal = dealList.get(position);
         holder.title.setText(deal.getName());
-        holder.amount.setText(String.valueOf(deal.getAmount()));
+        holder.amount.setText(String.valueOf(deal.getCurrency()) + String.valueOf(deal.getAmount()));
 
         // loading album cover using Glide library
         Glide.with(mContext).load(deal.getThumbnail()).into(holder.thumbnail);
 
-        //holder.resortMenu.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View view) {
-        //        showPopupMenu(holder.resortMenu);
-        //    }
-        //});
-    }
-
-    /**
-     * Showing popup menu when tapping on 3 dots
-     */
-    private void showPopupMenu(View view) {
-        // inflate menu
-        //PopupMenu popup = new PopupMenu(mContext, view);
-        //MenuInflater inflater = popup.getMenuInflater();
-        //inflater.inflate(R.menu.menu_resort, popup.getMenu());
-        //popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-        //popup.show();
-    }
-
-    /**
-     * Click listener for popup menu items
-     */
-    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-
-        public MyMenuItemClickListener() {
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                //case R.id.action_add_favourite:
-                //    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-                //    return true;
-                //case R.id.action_play_next:
-                //    Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
-                //    return true;
-                default:
-            }
-            return false;
-        }
+        // apply click events
+        applyClickEvents(holder, position);
     }
 
     @Override
@@ -119,5 +92,48 @@ public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdap
 
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.getResources().getDisplayMetrics()));
     }
+
+    private void applyClickEvents(DealViewHolder holder, final int position) {
+        holder.addShoppingCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onShoppingCartClicked(position);
+            }
+        });
+
+        holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onThumbnailClicked(position);
+            }
+        });
+
+        holder.dealContainer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onDealRowClicked(position);
+            }
+        });
+
+        holder.dealContainer.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                listener.onDealRowLongClicked(position);
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS);
+                return true;
+            }
+        });
+    }
+
+    public interface DealsAdapterListener {
+        void onShoppingCartClicked(int position);
+
+        void onThumbnailClicked(int position);
+
+        void onDealRowClicked(int position);
+
+        void onDealRowLongClicked(int position);
+    }
+
 
 }

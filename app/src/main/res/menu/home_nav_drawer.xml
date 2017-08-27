@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/26/17 11:45 AM
+  ~ Created by Mong Ramos Jr. on 8/27/17 4:55 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/26/17 9:43 AM
+  ~ Last modified 8/27/17 9:39 AM
   -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
@@ -12,15 +12,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_resorts"
-            android:icon="@drawable/ic_beach_access_black_48dp"
+            android:icon="@drawable/ic_beach_access_white_48dp"
             android:title="@string/title_resorts" />
         <item
             android:id="@+id/nav_deals"
-            android:icon="@drawable/ic_local_offer_black_48dp"
+            android:icon="@drawable/ic_local_offer_white_48dp"
             android:title="@string/title_deals" />
         <item
             android:id="@+id/nav_newsletter"
-            android:icon="@drawable/ic_whatshot_black_48dp"
+            android:icon="@drawable/ic_whatshot_white_48dp"
             android:title="@string/title_newsletter" />
     </group>
 </menu>

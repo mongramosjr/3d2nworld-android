@@ -1,9 +1,9 @@
 <!--
-  ~ Created by Mong Ramos Jr. on 8/26/17 9:33 PM
+  ~ Created by Mong Ramos Jr. on 8/27/17 4:55 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/26/17 2:54 PM
+  ~ Last modified 8/27/17 4:47 PM
   -->
 
 <resources>
@@ -25,8 +25,24 @@
     <dimen name="resort_title_padding">10dp</dimen>
     <dimen name="resort_title_padding_top">10dp</dimen>
     <dimen name="resort_title_padding_bottom">2dp</dimen>
+    <dimen name="resort_title_padding_right">30dp</dimen>
+    <dimen name="resort_title_padding_left">2dp</dimen>
     <dimen name="resort_title">16sp</dimen>
 
     <dimen name="deal_amount">12sp</dimen>
+    <dimen name="deal_amount_padding_right">8dp</dimen>
+    <dimen name="deal_amount_padding_left">8dp</dimen>
+    <dimen name="deal_amount_padding_bottom">2dp</dimen>
+    <dimen name="deal_amount_padding_top">2dp</dimen>
+
     <dimen name="deal_banner_height">160dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <dimen name="ic_deal_shopping_cart_width">20dp</dimen>
+    <dimen name="ic_deal_shopping_cart_height">20dp</dimen>
+    <dimen name="ic_deal_shopping_cart_margin_top">10dp</dimen>
+    <dimen name="ic_deal_shopping_cart_margin_right">5dp</dimen>
+    <dimen name="ic_deal_shopping_cart_margin_left">5dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
 </resources>

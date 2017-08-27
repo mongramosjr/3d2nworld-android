@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Mong Ramos Jr. on 8/26/17 9:33 PM
+  ~ Created by Mong Ramos Jr. on 8/27/17 4:55 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/26/17 2:46 PM
+  ~ Last modified 8/27/17 4:44 PM
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brainbox.a3d2nworld">
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <!-- To access Google+ APIs: -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,22 +26,43 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.ResortsActivity"
-            android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:label="@string/title_activity_deals"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.DealsActivity"
             android:label="@string/title_activity_deals"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.MainFragmentActivity"
+            android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+        <activity
+            android:name=".activity.DealActivity"
+            android:label="@string/title_activity_deal"
+            android:parentActivityName=".activity.MainFragmentActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
+                <data
+                    android:host="www.3d2nworld.com"
+                    android:scheme="http" />
 
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.brainbox.a3d2nworld.activity.MainFragmentActivity" />
         </activity>
     </application>
 
