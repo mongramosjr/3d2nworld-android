@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/28/17 9:36 PM
+  ~ Created by Mong Ramos Jr. on 8/28/17 9:39 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/28/17 6:44 AM
+  ~ Last modified 8/28/17 9:38 PM
   -->
 
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
