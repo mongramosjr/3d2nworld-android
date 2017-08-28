@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+ * Created by Mong Ramos Jr. on 8/28/17 9:36 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/27/17 10:14 AM
+ * Last modified 8/28/17 12:11 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
@@ -29,6 +29,7 @@ import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.adapter.ResortsRecyclerAdapter;
 import com.brainbox.a3d2nworld.base.BaseDrawerActivity;
 import com.brainbox.a3d2nworld.model.Resort;
+import com.brainbox.a3d2nworld.model.ResortInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class ResortsActivity extends BaseDrawerActivity {
 
     private RecyclerView recyclerView;
     private ResortsRecyclerAdapter resortAdapter;
-    private List<Resort> resortList;
+    private ArrayList<ResortInfo> resortList;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -121,16 +122,20 @@ public class ResortsActivity extends BaseDrawerActivity {
                 R.drawable.resort3,
                 R.drawable.resort4};
 
-        Resort resort = new Resort("Henann Lagoon Resort", "Come and take pleasure on a private escape right in the heart of Boracay Island. Experience Boracay in luxury and comfort at Henann Lagoon Resort.", 13, banners[0]);
+        ResortInfo resort = new ResortInfo(1, "Henann Lagoon Resort", "Come and take pleasure on a private escape right in the heart of Boracay Island. Experience Boracay in luxury and comfort at Henann Lagoon Resort.", 13);
+        resort.setThumbnail(banners[0]);
         resortList.add(resort);
 
-        resort = new Resort("Henann Garden Resort", "Luxurious, affordable accommodations without compromise.", 8, banners[1]);
+        resort = new ResortInfo(2, "Henann Garden Resort", "Luxurious, affordable accommodations without compromise.", 8);
+        resort.setThumbnail(banners[1]);
         resortList.add(resort);
 
-        resort = new Resort("Boracay Tropics", "Boracay Tropics gives you privacy when you need it, party energy at your fingertips.", 11, banners[2]);
+        resort = new ResortInfo(3, "Boracay Tropics", "Boracay Tropics gives you privacy when you need it, party energy at your fingertips.", 11);
+        resort.setThumbnail(banners[2]);
         resortList.add(resort);
 
-        resort = new Resort("Henann Regency Resort & Spa", "Experience the crystal clear waters and powder-white sand of the island like never before with Henann Regency.",12, banners[3]);
+        resort = new ResortInfo(4, "Henann Regency Resort & Spa", "Experience the crystal clear waters and powder-white sand of the island like never before with Henann Regency.",12);
+        resort.setThumbnail(banners[3]);
         resortList.add(resort);
 
         resortAdapter.notifyDataSetChanged();

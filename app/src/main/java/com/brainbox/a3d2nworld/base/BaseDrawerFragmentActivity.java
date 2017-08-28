@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+ * Created by Mong Ramos Jr. on 8/28/17 9:36 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/27/17 10:14 AM
+ * Last modified 8/28/17 6:44 AM
  */
 
 package com.brainbox.a3d2nworld.base;
@@ -103,6 +103,9 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
         Fragment fragment = null;
         Class fragmentClass;
 
+        Bundle bundle = new Bundle();
+
+
         //to prevent current item select over and over
         if (item.isChecked()) {
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -121,7 +124,10 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
 				
 				//-- using fragment
 				fragmentClass = ResortsFragment.class;
-				
+
+                //set arguments
+                //bundle.putSparseParcelableArray();
+
 				break;
 				
 			case R.id.nav_deals:
@@ -132,28 +138,37 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
 				
 				//-- using fragment
 				fragmentClass = DealsFragment.class;
+
+                //set arguments
+                //bundle.putSparseParcelableArray();
 				
 				break;
 			
 			case R.id.nav_newsletter:
 				
 				fragmentClass = DealsFragment.class;
+
+                //set arguments
+                //bundle.putSparseParcelableArray();
 				break;
 				
 			default:
-				fragmentClass = DealsFragment.class;
+                fragmentClass = ResortsFragment.class;
+                //set arguments
+                //bundle.putSparseParcelableArray();
 			
 		}
 		
 		//-- using fragment
         try {
 			fragment = (Fragment) fragmentClass.newInstance();
+            fragment.setArguments(bundle);
         } catch (Exception e) {
             e.printStackTrace();
         }
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.deal_coordinator_layout, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_fragment_frame_layout, fragment).commit();
 
 
         // Highlight the selected item has been done by NavigationView

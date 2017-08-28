@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Mong Ramos Jr. on 8/28/17 9:36 PM
+  ~
+  ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
+  ~
+  ~ Last modified 8/28/17 8:22 PM
+  -->
+
+<resources>
+    <integer name="deals_grid_columns">2</integer>
+    <dimen name="deal_banner_height">200dp</dimen>
+
+</resources>

@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/26/17 11:45 AM
+ * Created by Mong Ramos Jr. on 8/28/17 9:36 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/26/17 10:19 AM
+ * Last modified 8/28/17 11:53 AM
  */
 
 package com.brainbox.a3d2nworld.model;
@@ -11,11 +11,12 @@ package com.brainbox.a3d2nworld.model;
 public class Resort {
 
     private String name;
-    private String shortDesc;
+    private String htmlDesc;
     private float amount = 0.00f;
     private int thumbnail;
     private int likes = 0;
     private int stars = 0;
+    private int idx;
 
     public Resort() {
     }
@@ -23,7 +24,7 @@ public class Resort {
     public Resort(String name, String shortDesc, int likes, int thumbnail) {
         this.name = name;
         this.likes = likes;
-        this.shortDesc = shortDesc;
+        this.htmlDesc = shortDesc;
         this.thumbnail = thumbnail;
     }
 
@@ -35,12 +36,12 @@ public class Resort {
         this.name = name;
     }
 
-    public String getShortDesc() {
-        return shortDesc;
+    public String getHtmlDesc() {
+        return htmlDesc;
     }
 
-    public void setShortDeschortDesc(String shortDesc) {
-        this.shortDesc = shortDesc;
+    public void setShortDesc(String shortDesc) {
+        this.htmlDesc = shortDesc;
     }
 
     public float getAmount() {
@@ -66,4 +67,7 @@ public class Resort {
     public void setLikes(int likes) {
         this.likes = likes;
     }
+
+    public int getIdx(){return idx; }
+    void setIdx(int idx) {this.idx = idx; }
 }

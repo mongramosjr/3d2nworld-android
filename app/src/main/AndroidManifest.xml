@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+  ~ Created by Mong Ramos Jr. on 8/28/17 9:36 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/27/17 4:44 PM
+  ~ Last modified 8/28/17 9:31 PM
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brainbox.a3d2nworld">
@@ -27,24 +27,20 @@
         <activity
             android:name=".activity.ResortsActivity"
             android:label="@string/title_activity_deals"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DealsActivity"
             android:label="@string/title_activity_deals"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.MainFragmentActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".activity.DealActivity"
             android:label="@string/title_activity_deal"

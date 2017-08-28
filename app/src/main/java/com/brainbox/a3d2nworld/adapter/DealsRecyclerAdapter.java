@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+ * Created by Mong Ramos Jr. on 8/28/17 9:36 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/27/17 4:54 PM
+ * Last modified 8/28/17 2:36 PM
  */
 
 package com.brainbox.a3d2nworld.adapter;
@@ -21,15 +21,18 @@ import android.widget.TextView;
 import android.util.TypedValue;
 
 import com.brainbox.a3d2nworld.R;
-import com.brainbox.a3d2nworld.model.Deal;
+import com.brainbox.a3d2nworld.model.DealInfo;
 import com.bumptech.glide.Glide;
-import java.util.List;
+
+import java.util.ArrayList;
 
 public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdapter.DealViewHolder> {
 
     private Context mContext;
-    private List<Deal> dealList;
     private DealsAdapterListener listener;
+
+    //private CopyOnWriteArrayList<DealInfo> dealList; //using threadsafe
+    private ArrayList<DealInfo> dealList;
 
     public class DealViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener{
         public TextView title, htmlDesc;
@@ -57,7 +60,7 @@ public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdap
     }
 
 
-    public DealsRecyclerAdapter(Context mContext, List<Deal> dealList, DealsAdapterListener listener) {
+    public DealsRecyclerAdapter(Context mContext, ArrayList<DealInfo> dealList, DealsAdapterListener listener) {
         this.mContext = mContext;
         this.dealList = dealList;
         this.listener = listener;
@@ -72,7 +75,7 @@ public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdap
 
     @Override
     public void onBindViewHolder(final DealViewHolder holder, int position) {
-        Deal deal = dealList.get(position);
+        DealInfo deal = dealList.get(position);
         holder.title.setText(deal.getName());
         holder.amount.setText(String.valueOf(deal.getCurrency()) + String.valueOf(deal.getAmount()));
 
@@ -93,6 +96,7 @@ public class DealsRecyclerAdapter extends RecyclerView.Adapter<DealsRecyclerAdap
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.getResources().getDisplayMetrics()));
     }
 
+    //Click Listener
     private void applyClickEvents(DealViewHolder holder, final int position) {
         holder.addShoppingCart.setOnClickListener(new View.OnClickListener() {
             @Override

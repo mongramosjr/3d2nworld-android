@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+ * Created by Mong Ramos Jr. on 8/28/17 9:36 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/27/17 4:54 PM
+ * Last modified 8/28/17 4:55 PM
  */
 
 package com.brainbox.a3d2nworld.fragment;
@@ -21,7 +21,10 @@ import android.view.ViewGroup;
 
 import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.adapter.ResortsRecyclerAdapter;
+import com.brainbox.a3d2nworld.model.DataRequested;
+import com.brainbox.a3d2nworld.model.DealInfo;
 import com.brainbox.a3d2nworld.model.Resort;
+import com.brainbox.a3d2nworld.model.ResortInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,7 @@ public class ResortsFragment extends Fragment {
 	
     private RecyclerView recyclerView;
     private ResortsRecyclerAdapter resortAdapter;
-    private List<Resort> resortList;
+    private ArrayList<ResortInfo> resortList;
     private SwipeRefreshLayout swipeRefreshLayout;
     
     // The onCreateView method is called when Fragment should create its View object hierarchy,
@@ -38,7 +41,7 @@ public class ResortsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.main_resorts_content, parent, false);
+        return inflater.inflate(R.layout.main_fragment_resorts_content, parent, false);
     }
 	
     // This event is triggered soon after onCreateView().
@@ -46,11 +49,17 @@ public class ResortsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         // Setup any handles to view objects here
-        recyclerView = view.findViewById(R.id.resorts_recycler_view);
-        resortList = new ArrayList<>();
+        recyclerView = view.findViewById(R.id.main_fragment_resorts_recycler_view);
+
+
+        //resortList = new ArrayList<>();
+        // get from singleton
+        resortList = DataRequested.getInstance().getResorts();
+
         resortAdapter = new ResortsRecyclerAdapter(view.getContext(), resortList);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(),1, LinearLayoutManager.HORIZONTAL, false);
+        final int resorts_grid_columns = getResources().getInteger(R.integer.resorts_grid_columns);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(), resorts_grid_columns, LinearLayoutManager.HORIZONTAL, false);
         //RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);
 
         recyclerView.setLayoutManager(mLayoutManager);
@@ -59,23 +68,63 @@ public class ResortsFragment extends Fragment {
         recyclerView.setAdapter(resortAdapter);
 
 
-        swipeRefreshLayout = view.findViewById(R.id.resorts_swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.main_fragment_resorts_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                prepareResorts();
+                int lastIdResorts = DataRequested.getInstance().getLastIdResorts();
+                refreshResorts(lastIdResorts);
             }
         });
 
-        prepareResorts();
+        getResorts();
+    }
+
+    private void getResorts() {
+
+        swipeRefreshLayout.setRefreshing(true);
+
+        //TODO: get from server after the last id
+        // 1. if empty singleton, pull from the server, save to sqlite and singleton,
+        // notify adapter
+        // 2. if singleton is not empty and no network, dont notify adapter
+        // 3. if singleton is not empty,pull from the server starting from the last id,
+        // append to sqlite and singleton if has results, notify adapter.
+        // otherwise dont notify adapter
+
+        resortList = DataRequested.getInstance().getResorts();
+
+        if(resortList.size() == 0 ){
+
+            //TODO: replace this with data from server
+            getSampleResorts();
+
+            if(resortList.size()>0){
+                resortAdapter.notifyDataSetChanged();
+            }
+        }else{
+
+
+        }
+
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void refreshResorts(int last_insert_id){
+
+        swipeRefreshLayout.setRefreshing(true);
+
+        //TODO: get from server after the last id
+        getAnotherSampleResorts(last_insert_id);
+
+        resortAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
     
 	/**
      * Adding few albums for testing
      */
-    private void prepareResorts() {
-
-        swipeRefreshLayout.setRefreshing(true);
+    private void getSampleResorts() {
 
         int[] banners = new int[]{
                 R.drawable.resort1,
@@ -83,20 +132,52 @@ public class ResortsFragment extends Fragment {
                 R.drawable.resort3,
                 R.drawable.resort4};
 
-        Resort resort = new Resort("Henann Lagoon Resort", "Come and take pleasure on a private escape right in the heart of Boracay Island. Experience Boracay in luxury and comfort at Henann Lagoon Resort.", 13, banners[0]);
+        ResortInfo resort = new ResortInfo(1, "Henann Lagoon Resort", "Come and take pleasure on a private escape right in the heart of Boracay Island. Experience Boracay in luxury and comfort at Henann Lagoon Resort.", 13);
+        resort.setThumbnail(banners[0]);
         resortList.add(resort);
 
-        resort = new Resort("Henann Garden Resort", "Luxurious, affordable accommodations without compromise.", 8, banners[1]);
+        resort = new ResortInfo(2, "Henann Garden Resort", "Luxurious, affordable accommodations without compromise.", 8);
+        resort.setThumbnail(banners[1]);
         resortList.add(resort);
 
-        resort = new Resort("Boracay Tropics", "Boracay Tropics gives you privacy when you need it, party energy at your fingertips.", 11, banners[2]);
+        resort = new ResortInfo(3, "Boracay Tropics", "Boracay Tropics gives you privacy when you need it, party energy at your fingertips.", 11);
+        resort.setThumbnail(banners[2]);
         resortList.add(resort);
 
-        resort = new Resort("Henann Regency Resort & Spa", "Experience the crystal clear waters and powder-white sand of the island like never before with Henann Regency.",12, banners[3]);
+        resort = new ResortInfo(4, "Henann Regency Resort & Spa", "Experience the crystal clear waters and powder-white sand of the island like never before with Henann Regency.",12);
+        resort.setThumbnail(banners[3]);
         resortList.add(resort);
 
-        resortAdapter.notifyDataSetChanged();
+        DataRequested.getInstance().setLastIdDeals(4);
 
-        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void getAnotherSampleResorts(int last_insert_id){
+
+        int[] banners = new int[]{
+                R.drawable.resort1,
+                R.drawable.resort2,
+                R.drawable.resort3,
+                R.drawable.resort4};
+
+
+
+        ResortInfo resort = new ResortInfo(1, "Henann Lagoon Resort", "Come and take pleasure on a private escape right in the heart of Boracay Island. Experience Boracay in luxury and comfort at Henann Lagoon Resort.", 13);
+        resort.setThumbnail(banners[0]);
+        resortList.add(0, resort);
+
+        resort = new ResortInfo(2, "Henann Garden Resort", "Luxurious, affordable accommodations without compromise.", 8);
+        resort.setThumbnail(banners[1]);
+        resortList.add(0, resort);
+
+        resort = new ResortInfo(3, "Boracay Tropics", "Boracay Tropics gives you privacy when you need it, party energy at your fingertips.", 11);
+        resort.setThumbnail(banners[2]);
+        resortList.add(0, resort);
+
+        resort = new ResortInfo(4, "Henann Regency Resort & Spa", "Experience the crystal clear waters and powder-white sand of the island like never before with Henann Regency.",12);
+        resort.setThumbnail(banners[3]);
+        resortList.add(0, resort);
+
+        DataRequested.getInstance().setLastIdResorts(last_insert_id+4);
     }
 }

@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+ * Created by Mong Ramos Jr. on 8/28/17 9:36 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/27/17 2:28 PM
+ * Last modified 8/28/17 12:10 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
@@ -29,15 +29,15 @@ import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.adapter.DealsRecyclerAdapter;
 import com.brainbox.a3d2nworld.base.BaseDrawerActivity;
 import com.brainbox.a3d2nworld.model.Deal;
+import com.brainbox.a3d2nworld.model.DealInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAdapter.DealsAdapterListener {
 
     private RecyclerView recyclerView;
     private DealsRecyclerAdapter dealAdapter;
-    private List<Deal> dealList;
+    private ArrayList<DealInfo> dealList;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -110,16 +110,20 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
                 R.drawable.resort3,
                 R.drawable.resort4};
 
-        Deal deal = new Deal("Henann Lagoon Resort", 13, banners[0]);
+        DealInfo deal = new DealInfo(1, "Henann Lagoon Resort", 1395);
+        deal.setThumbnail(banners[0]);
         dealList.add(deal);
 
-        deal = new Deal("Henann Garden Resort", 8, banners[1]);
+        deal = new DealInfo(2, "Henann Garden Resort", 8080);
+        deal.setThumbnail(banners[1]);
         dealList.add(deal);
 
-        deal = new Deal("Boracay Tropics", 11, banners[2]);
+        deal = new DealInfo(3, "Boracay Tropics", 1180);
+        deal.setThumbnail(banners[2]);
         dealList.add(deal);
 
-        deal = new Deal("Henann Regency Resort & Spa", 12, banners[3]);
+        deal = new DealInfo(4, "Henann Regency Resort & Spa", 1280);
+        deal.setThumbnail(banners[3]);
         dealList.add(deal);
 
         dealAdapter.notifyDataSetChanged();
@@ -173,9 +177,12 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
+
+
+    //Click
     @Override
     public void onShoppingCartClicked(int position) {
-        Deal deal = dealList.get(position);
+        DealInfo deal = dealList.get(position);
         Toast.makeText(this.getBaseContext(), "Read: IconClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
     }
 
@@ -183,13 +190,13 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
     public void onThumbnailClicked(int position) {
         // Star icon is clicked,
         // mark the message as important
-        Deal deal = dealList.get(position);
+        DealInfo deal = dealList.get(position);
         Toast.makeText(this.getBaseContext(), "Read: IconImportantClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDealRowClicked(int position) {
-        Deal deal = dealList.get(position);
+        DealInfo deal = dealList.get(position);
         Toast.makeText(this.getBaseContext(), "Read: RowClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
 
     }
@@ -197,7 +204,7 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
     @Override
     public void onDealRowLongClicked(int position) {
         // long press is performed, enable action mode
-        Deal deal = dealList.get(position);
+        DealInfo deal = dealList.get(position);
         Toast.makeText(this.getBaseContext(), "Read: LongClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
     }
 

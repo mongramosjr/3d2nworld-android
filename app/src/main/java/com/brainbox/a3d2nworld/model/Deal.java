@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+ * Created by Mong Ramos Jr. on 8/28/17 9:36 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/27/17 3:27 PM
+ * Last modified 8/28/17 7:16 AM
  */
 
 package com.brainbox.a3d2nworld.model;
@@ -11,12 +11,15 @@ package com.brainbox.a3d2nworld.model;
 
 public class Deal {
 
+    private int idx;
     private String name;
     private String htmlDesc;
     private String currency = "$";
     private float amount = 0.00f;
     private int thumbnail;
     private Resort resort;
+
+
 
     public Deal() {
     }
@@ -73,4 +76,8 @@ public class Deal {
     public String getCurrency(){return currency;}
 
     public void setCurrency(String currency) {this.currency = currency; }
+
+    public int getIdx(){return idx; }
+    void setIdx(int idx) {this.idx = idx; }
+
 }

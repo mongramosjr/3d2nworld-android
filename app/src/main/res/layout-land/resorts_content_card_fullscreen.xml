@@ -4,7 +4,7 @@
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/28/17 5:22 PM
+  ~ Last modified 8/28/17 5:26 PM
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,15 +18,16 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/home_card_margin"
         android:elevation="3dp"
+        android:numColumns="auto_fit"
         card_view:cardCornerRadius="@dimen/home_card_radius">
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/resort_thumbnail"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/name_resort"
@@ -35,7 +36,7 @@
 
             <LinearLayout
                 android:id="@+id/resort_label_view"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
                 android:background="#4e94ca"
