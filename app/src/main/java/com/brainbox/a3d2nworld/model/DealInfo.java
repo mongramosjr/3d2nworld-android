@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/7/17 11:47 AM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 9/9/17 5:29 AM
  */
 
 package com.brainbox.a3d2nworld.model;
@@ -81,7 +81,7 @@ public class DealInfo implements Parcelable {
 
     //setter and getter
     public int getIdx(){return idx; }
-    void setIdx(int idx) {this.idx = idx; }
+    public void setIdx(int idx) {this.idx = idx; }
 
     public String getName() {
         return name;

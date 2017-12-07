@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+  ~ Created by Mong Ramos Jr. on 12/7/17 11:47 AM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/28/17 9:38 PM
+  ~ Last modified 8/29/17 10:24 AM
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brainbox.a3d2nworld">
@@ -36,7 +36,12 @@
             android:name=".activity.MainFragmentActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN">
+                </action>
+                <category android:name="android.intent.category.LAUNCHER">
+                </category>
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.LoginActivity"
@@ -58,7 +63,8 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.brainbox.a3d2nworld.activity.MainFragmentActivity" />
+                android:value="com.brainbox.a3d2nworld.activity.MainFragmentActivity"
+                />
         </activity>
     </application>
 

@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/7/17 11:47 AM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 8/29/17 12:56 PM
  */
 
 package com.brainbox.a3d2nworld.fragment;
@@ -64,6 +64,9 @@ public class DealsFragment extends Fragment implements DealsRecyclerAdapter.Deal
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
         currentView = view;
+
+
+
         // Setup any handles to view objects here
         recyclerView = view.findViewById(R.id.main_fragment_deals_recycler_view);
 
@@ -216,17 +219,23 @@ public class DealsFragment extends Fragment implements DealsRecyclerAdapter.Deal
 
         Intent intent = new Intent(this.getContext(), DealActivity.class);
 
-        //pass parcelable array
-        intent.putExtra("name", deal.getName());
-        intent.putExtra("amount", deal.getAmount());
+        //pass the nav drawer menu for deal
+        intent.putExtra("main_fragment_id", R.id.nav_deals);
+
         //intent.putParcelableArrayListExtra()
         //Bundle bundle = new Bundle();
         //bundle.putParcelableArrayList();
 
         ActivityOptionsCompat activityOptions;
         activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this.getActivity());
-        ActivityCompat.startActivity(this.getContext(), intent, activityOptions.toBundle());
-        startActivity(intent, activityOptions.toBundle());
+
+        //ActivityCompat.startActivity(this.getContext(), intent, activityOptions.toBundle());
+        //startActivity(intent, activityOptions.toBundle());
+        //ActivityCompat.startActivityForResult(this.getActivity(), intent, 0, activityOptions.toBundle());
+        //startActivityForResult(intent, 200, activityOptions.toBundle());
+
+        //-- correct way in calling startActivity in fragment:
+        getActivity().startActivity(intent, activityOptions.toBundle());
 
 
     }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/26/17 11:45 AM
+  ~ Created by Mong Ramos Jr. on 12/7/17 11:47 AM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/26/17 9:45 AM
+  ~ Last modified 10/8/17 9:57 PM
   -->
 
 <full-backup-content>
-    <include domain="sharedpref" path="."/>
+    <include domain="sharedpref" urlPath="."/>
 </full-backup-content>

@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/27/17 4:55 PM
+ * Created by Mong Ramos Jr. on 12/7/17 11:47 AM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/27/17 10:14 AM
+ * Last modified 8/29/17 3:00 PM
  */
 
 package com.brainbox.a3d2nworld.base;
@@ -145,7 +145,7 @@ public class BaseDrawerActivity extends AppCompatActivity
         drawerLayout.closeDrawer(GravityCompat.START);
 
         //-- using Activity
-        ActivityCompat.startActivity(this, intent, activityOptions.toBundle());
+        startActivity(intent, activityOptions.toBundle());
 
         return true;
     }
