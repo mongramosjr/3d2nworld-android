@@ -1,0 +1,24 @@
+<!--
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+  ~
+  ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
+  ~
+  ~ Last modified 12/8/17 2:14 PM
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.brainbox.a3d2nworld.activity.ResortActivity$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/resort_section_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

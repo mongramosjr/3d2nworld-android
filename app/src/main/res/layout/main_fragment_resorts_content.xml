@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/28/17 9:38 PM
+  ~ Last modified 12/8/17 12:22 PM
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/viewBg"
+    android:background="@color/viewBackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 

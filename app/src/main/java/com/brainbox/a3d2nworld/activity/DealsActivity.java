@@ -1,22 +1,25 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 12/10/17 6:12 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -28,7 +31,6 @@ import android.widget.Toast;
 import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.adapter.DealsRecyclerAdapter;
 import com.brainbox.a3d2nworld.base.BaseDrawerActivity;
-import com.brainbox.a3d2nworld.model.Deal;
 import com.brainbox.a3d2nworld.model.DealInfo;
 
 import java.util.ArrayList;
@@ -56,23 +58,23 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
         //drawerLayout.addView(coordinatorLayout, 0);
 
         //toolbar
-        toolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        toolbar = findViewById(R.id.home_toolbar);
         toolbar.setLogo(R.drawable.toolbar_3d2n);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         //drawer layout
-        drawerLayout = (DrawerLayout) findViewById(R.id.deals_drawer_layout);
+        drawerLayout = findViewById(R.id.deals_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         //navigation view
-        NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.deals_recycler_view);
+        recyclerView = findViewById(R.id.deals_recycler_view);
         dealList = new ArrayList<>();
         dealAdapter = new DealsRecyclerAdapter(this, dealList, this);
 
@@ -85,13 +87,17 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
         recyclerView.setAdapter(dealAdapter);
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.deals_swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.deals_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 prepareDeals();
             }
         });
+
+
+        navigationView.getMenu().findItem(R.id.drawer_navigation_deals);
+        enabledMenuItemSelected(getIntent());
 
         prepareDeals();
     }
@@ -188,10 +194,16 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
 
     @Override
     public void onThumbnailClicked(int position) {
-        // Star icon is clicked,
-        // mark the message as important
         DealInfo deal = dealList.get(position);
         Toast.makeText(this.getBaseContext(), "Read: IconImportantClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent;
+        ActivityOptionsCompat activityOptions;
+        intent = new Intent(this, DealActivity.class);
+        activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+
+        if(intent != null && activityOptions != null) {
+            startActivity(intent, activityOptions.toBundle());
+        }
     }
 
     @Override
@@ -203,7 +215,6 @@ public class DealsActivity extends BaseDrawerActivity implements DealsRecyclerAd
 
     @Override
     public void onDealRowLongClicked(int position) {
-        // long press is performed, enable action mode
         DealInfo deal = dealList.get(position);
         Toast.makeText(this.getBaseContext(), "Read: LongClicked " + deal.getName(), Toast.LENGTH_SHORT).show();
     }

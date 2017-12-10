@@ -1,13 +1,14 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 12/10/17 6:09 PM
  */
 
 package com.brainbox.a3d2nworld.fragment;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -29,7 +30,7 @@ import com.brainbox.a3d2nworld.model.ResortInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResortsFragment extends Fragment {
+public class ResortsFragment extends Fragment implements ResortsRecyclerAdapter.ResortsAdapterListener {
 	
     private RecyclerView recyclerView;
     private ResortsRecyclerAdapter resortAdapter;
@@ -39,7 +40,7 @@ public class ResortsFragment extends Fragment {
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation. 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
         return inflater.inflate(R.layout.main_fragment_resorts_content, parent, false);
     }
@@ -47,7 +48,7 @@ public class ResortsFragment extends Fragment {
     // This event is triggered soon after onCreateView().
     // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         // Setup any handles to view objects here
         recyclerView = view.findViewById(R.id.main_fragment_resorts_recycler_view);
 
@@ -56,7 +57,7 @@ public class ResortsFragment extends Fragment {
         // get from singleton
         resortList = DataRequested.getInstance().getResorts();
 
-        resortAdapter = new ResortsRecyclerAdapter(view.getContext(), resortList);
+        resortAdapter = new ResortsRecyclerAdapter(view.getContext(), resortList, this);
 
         final int resorts_grid_columns = getResources().getInteger(R.integer.resorts_grid_columns);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(view.getContext(), resorts_grid_columns, LinearLayoutManager.HORIZONTAL, false);
@@ -179,5 +180,10 @@ public class ResortsFragment extends Fragment {
         resortList.add(0, resort);
 
         DataRequested.getInstance().setLastIdResorts(last_insert_id+4);
+    }
+
+    @Override
+    public void onThumbnailClicked(int position) {
+
     }
 }

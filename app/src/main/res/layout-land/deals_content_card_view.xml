@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/28/17 9:38 PM
+  ~ Last modified 12/10/17 6:04 PM
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -33,6 +33,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/name_resort"
                 android:clickable="true"
+                android:focusable="true"
                 android:scaleType="centerCrop" />
 
                 <LinearLayout
@@ -57,8 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/deal_thumbnail"
                     android:paddingBottom="@dimen/resort_title_padding_bottom"
-                    android:paddingLeft="@dimen/resort_title_padding"
-                    android:paddingRight="@dimen/resort_title_padding_right"
+                    android:paddingStart="@dimen/resort_title_padding"
+                    android:paddingEnd="@dimen/resort_title_padding_right"
                     android:paddingTop="@dimen/resort_title_padding_top"
                     android:textSize="@dimen/resort_title" />
 
@@ -66,13 +67,14 @@
                 android:id="@+id/deal_add_shopping_cart"
                 android:layout_width="@dimen/ic_deal_shopping_cart_width"
                 android:layout_height="@dimen/ic_deal_shopping_cart_height"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_below="@id/deal_thumbnail"
                 android:layout_marginTop="@dimen/ic_deal_shopping_cart_margin_top"
-                android:layout_marginRight="@dimen/ic_deal_shopping_cart_margin_right"
-                android:layout_marginLeft="@dimen/ic_deal_shopping_cart_margin_left"
+                android:layout_marginEnd="@dimen/ic_deal_shopping_cart_margin_right"
+                android:layout_marginStart="@dimen/ic_deal_shopping_cart_margin_left"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_add_shopping_cart_black_48dp" />
+                android:src="@drawable/cart_plus"
+                android:contentDescription="@string/title_cart"/>
 
         </RelativeLayout>
     </android.support.v7.widget.CardView>

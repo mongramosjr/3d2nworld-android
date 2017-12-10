@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+  ~
+  ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
+  ~
+  ~ Last modified 12/10/17 5:49 PM
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</LinearLayout>

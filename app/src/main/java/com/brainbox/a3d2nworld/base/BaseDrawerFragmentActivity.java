@@ -1,14 +1,15 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 12/10/17 6:12 PM
  */
 
 package com.brainbox.a3d2nworld.base;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -42,7 +43,7 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
         //super.setContentView(R.layout.base_drawer_activity);
 
         //toolbar
-        //toolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        //toolbar = (Toolbar) findViewById(R.id.toolbar);
         //toolbar.setLogo(R.drawable.toolbar_3d2n);
         //toolbar.setTitle("");
         //setSupportActionBar(toolbar);
@@ -75,7 +76,7 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
@@ -96,7 +97,7 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
 
@@ -116,7 +117,7 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
 
 
 		switch(id) {
-			case R.id.nav_resorts:
+			case R.id.drawer_navigation_resorts:
 				//-- using Linearlayout
 				//LayoutInflater inflater = getLayoutInflater();
 				//LinearLayout container = (LinearLayout) findViewById(R.id.main_view);
@@ -130,7 +131,7 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
 
 				break;
 				
-			case R.id.nav_deals:
+			case R.id.drawer_navigation_deals:
 				//-- using Linearlayout
 				//LayoutInflater inflater = getLayoutInflater();
 				//LinearLayout container = (LinearLayout) findViewById(R.id.main_view);
@@ -144,7 +145,7 @@ public class BaseDrawerFragmentActivity extends AppCompatActivity
 				
 				break;
 			
-			case R.id.nav_newsletter:
+			case R.id.drawer_navigation_blogs:
 				
 				fragmentClass = DealsFragment.class;
 

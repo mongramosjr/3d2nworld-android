@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 12/7/17 11:47 AM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 12/7/17 11:46 AM
+ * Last modified 12/8/17 12:05 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
@@ -12,9 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 
 import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.base.BaseDrawerFragmentActivity;
@@ -48,16 +46,16 @@ public class MainFragmentActivity extends BaseDrawerFragmentActivity {
         toggle.syncState();
 
         //navigation view
-        NavigationView navigationView = findViewById(R.id.home_nav_view);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //check if there is intent to view the fragment, otherwise show the resorts
-        int nav = getIntent().getIntExtra("main_fragment_id", R.id.nav_resorts);
+        int nav = getIntent().getIntExtra("main_fragment_id", R.id.drawer_navigation_resorts);
         onNavigationItemSelected(navigationView.getMenu().findItem(nav));
-        if(nav == R.id.nav_resorts){
-            navigationView.setCheckedItem(R.id.nav_resorts);
-        }else if(nav == R.id.nav_deals){
-            navigationView.setCheckedItem(R.id.nav_newsletter);
+        if(nav == R.id.drawer_navigation_resorts){
+            navigationView.setCheckedItem(R.id.drawer_navigation_resorts);
+        }else if(nav == R.id.drawer_navigation_deals){
+            navigationView.setCheckedItem(R.id.drawer_navigation_blogs);
         }
     }
 

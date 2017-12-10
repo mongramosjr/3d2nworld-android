@@ -1,14 +1,15 @@
 /*
- * Created by Mong Ramos Jr. on 12/7/17 11:47 AM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 12/7/17 11:46 AM
+ * Last modified 12/10/17 6:11 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -56,7 +57,9 @@ public class DealActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.deal_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null ) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -103,7 +106,7 @@ public class DealActivity extends AppCompatActivity {
             // as you specify a parent activity in AndroidManifest.xml.
             case android.R.id.home:
                 Intent upIntent = NavUtils.getParentActivityIntent(this);
-                upIntent.putExtra("main_fragment_id", R.id.nav_deals);
+                upIntent.putExtra("selected_menu_id", R.id.drawer_navigation_deals);
                 if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
                     // This activity is NOT part of this app's task, so create a new task
                     // when navigating up, with a synthesized back stack.
@@ -154,11 +157,11 @@ public class DealActivity extends AppCompatActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.deal_fragment, container, false);
+            View rootView = inflater.inflate(R.layout.deal_section, container, false);
             TextView textView = rootView.findViewById(R.id.deal_section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+//            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
     }

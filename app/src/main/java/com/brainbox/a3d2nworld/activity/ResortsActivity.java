@@ -1,18 +1,20 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 12/10/17 6:12 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,17 +26,18 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.adapter.ResortsRecyclerAdapter;
 import com.brainbox.a3d2nworld.base.BaseDrawerActivity;
+import com.brainbox.a3d2nworld.model.DealInfo;
 import com.brainbox.a3d2nworld.model.Resort;
 import com.brainbox.a3d2nworld.model.ResortInfo;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ResortsActivity extends BaseDrawerActivity {
+public class ResortsActivity extends BaseDrawerActivity implements ResortsRecyclerAdapter.ResortsAdapterListener{
 
 
     private RecyclerView recyclerView;
@@ -57,24 +60,24 @@ public class ResortsActivity extends BaseDrawerActivity {
         //drawerLayout.addView(coordinatorLayout, 0);
 
         //toolbar
-        toolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        toolbar = findViewById(R.id.home_toolbar);
         toolbar.setLogo(R.drawable.toolbar_3d2n);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         //drawer layout
-        drawerLayout = (DrawerLayout) findViewById(R.id.resorts_drawer_layout);
+        drawerLayout = findViewById(R.id.resorts_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
         //navigation view
-        NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.deal_fab);
+        FloatingActionButton fab = findViewById(R.id.deal_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,9 +86,9 @@ public class ResortsActivity extends BaseDrawerActivity {
             }
         });
 
-        recyclerView = (RecyclerView) findViewById(R.id.resorts_recycler_view);
+        recyclerView = findViewById(R.id.resorts_recycler_view);
         resortList = new ArrayList<>();
-        resortAdapter = new ResortsRecyclerAdapter(this, resortList);
+        resortAdapter = new ResortsRecyclerAdapter(this, resortList, this);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this,1, LinearLayoutManager.HORIZONTAL, false);
         //RecyclerView.LayoutManager mLayoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL);
@@ -96,7 +99,7 @@ public class ResortsActivity extends BaseDrawerActivity {
         recyclerView.setAdapter(resortAdapter);
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.resorts_swipe_refresh_layout);
+        swipeRefreshLayout = findViewById(R.id.resorts_swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -104,6 +107,8 @@ public class ResortsActivity extends BaseDrawerActivity {
             }
         });
 
+
+        enabledMenuItemSelected(getIntent());
         prepareResorts();
 
 
@@ -141,6 +146,20 @@ public class ResortsActivity extends BaseDrawerActivity {
         resortAdapter.notifyDataSetChanged();
 
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onThumbnailClicked(int position) {
+        ResortInfo resortInfo = resortList.get(position);
+        Toast.makeText(this.getBaseContext(), "Read: IconImportantClicked " + resortInfo.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent;
+        ActivityOptionsCompat activityOptions;
+        intent = new Intent(this, ResortActivity.class);
+        activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+
+        if(intent != null && activityOptions != null) {
+            startActivity(intent, activityOptions.toBundle());
+        }
     }
 
     /**

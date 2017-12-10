@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+  ~
+  ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
+  ~
+  ~ Last modified 12/8/17 12:53 PM
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/drawer_navigation_blogs"
+            android:icon="@drawable/book_open_page_variant"
+            android:title="@string/title_blogs" />
+        <item
+            android:id="@+id/drawer_navigation_deals"
+            android:icon="@drawable/beach"
+            android:title="@string/title_deals" />
+        <item
+            android:id="@+id/drawer_navigation_resorts"
+            android:icon="@drawable/hotel"
+            android:title="@string/title_resorts" />
+        <item
+            android:id="@+id/drawer_navigation_login"
+            android:icon="@drawable/login"
+            android:title="@string/title_login" />
+    </group>
+    <item android:title="@string/title_account"
+        android:id="@+id/drawer_navigation_account">
+        <menu>
+            <group android:checkableBehavior="single"
+                android:id="@+id/group_menu_login"
+                >
+
+                <item
+                    android:id="@+id/drawer_navigation_profile"
+                    android:icon="@drawable/face"
+                    android:title="@string/title_profile" />
+
+                <item
+                    android:id="@+id/drawer_navigation_vouchers"
+                    android:icon="@drawable/qrcode"
+                    android:title="@string/title_vouchers" />
+                <!--
+                            <item
+                                android:id="@+id/drawer_navigation_current_sales"
+                                android:icon="@drawable/currency_usd"
+                                android:title="@string/title_current_sales" />
+                -->
+                <item
+                    android:id="@+id/drawer_navigation_logout"
+                    android:icon="@drawable/logout"
+                    android:title="@string/title_logout" />
+            </group>
+
+
+        </menu>
+
+    </item>
+</menu>

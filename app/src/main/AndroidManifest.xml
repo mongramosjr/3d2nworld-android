@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Created by Mong Ramos Jr. on 12/7/17 11:47 AM
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/29/17 10:24 AM
+  ~ Last modified 12/10/17 6:13 PM
   -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brainbox.a3d2nworld">
@@ -25,31 +25,42 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.BlogsActivity"
+            android:label="@string/title_blogs"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.CartActivity"
+            android:label="@string/title_cart"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.ResortsActivity"
-            android:label="@string/title_activity_deals"
+            android:label="@string/title_resorts"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.DealsActivity"
-            android:label="@string/title_activity_deals"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.MainFragmentActivity"
-            android:label="@string/title_activity_home"
+            android:label="@string/title_deals"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN">
-                </action>
-                <category android:name="android.intent.category.LAUNCHER">
-                </category>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
+            android:name=".activity.MainFragmentActivity"
+            android:label="@string/title_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_login">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.brainbox.a3d2nworld.activity.DealsActivity" />
+        </activity>
         <activity
             android:name=".activity.DealActivity"
-            android:label="@string/title_activity_deal"
-            android:parentActivityName=".activity.MainFragmentActivity"
+            android:label="@string/title_deal"
+            android:parentActivityName=".activity.DealsActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -63,8 +74,45 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.brainbox.a3d2nworld.activity.MainFragmentActivity"
-                />
+                android:value="com.brainbox.a3d2nworld.activity.DealsActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ResortActivity"
+            android:label="@string/title_resort"
+            android:parentActivityName=".activity.ResortsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:host="www.3d2nworld.com"
+                    android:scheme="http" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.brainbox.a3d2nworld.activity.ResortsActivity" />
+        </activity>
+        <activity
+            android:name=".activity.BlogActivity"
+            android:label="@string/title_resort"
+            android:parentActivityName=".activity.BlogsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:host="www.3d2nworld.com"
+                    android:scheme="http" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.brainbox.a3d2nworld.activity.BlogsActivity" />
         </activity>
     </application>
 

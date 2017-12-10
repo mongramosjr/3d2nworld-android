@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/28/17 9:38 PM
+  ~ Last modified 12/10/17 6:02 PM
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,6 +32,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/name_resort"
                 android:clickable="true"
+                android:focusable="true"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
@@ -47,7 +48,6 @@
                     android:id="@+id/resort_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/resort_title"
                     android:paddingBottom="@dimen/resort_title_padding_bottom"
                     android:paddingLeft="@dimen/resort_title_padding"
                     android:paddingRight="@dimen/resort_title_padding"

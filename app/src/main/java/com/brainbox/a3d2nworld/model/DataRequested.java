@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 12/8/17 6:25 PM
  */
 
 package com.brainbox.a3d2nworld.model;
@@ -18,10 +18,10 @@ public class DataRequested {
     private int lastIdDeals = 0;
     private int lastIdResorts = 0;
 
-    private static final DataRequested dataInstance = new DataRequested();
+    private static final DataRequested onlyInstance = new DataRequested();
 
     public static DataRequested getInstance() {
-        return dataInstance;
+        return onlyInstance;
     }
 
     private DataRequested() {

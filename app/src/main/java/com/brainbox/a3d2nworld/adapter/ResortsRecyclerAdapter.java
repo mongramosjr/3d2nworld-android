@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 8/28/17 9:39 PM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/28/17 9:38 PM
+ * Last modified 12/8/17 2:08 PM
  */
 
 package com.brainbox.a3d2nworld.adapter;
@@ -32,6 +32,8 @@ public class ResortsRecyclerAdapter extends RecyclerView.Adapter<ResortsRecycler
 
     private Context mContext;
     private ArrayList<ResortInfo> resortList;
+    private ResortsAdapterListener listener;
+
 
     public class ResortViewHolder extends RecyclerView.ViewHolder {
         public TextView title, htmlDesc;
@@ -55,9 +57,10 @@ public class ResortsRecyclerAdapter extends RecyclerView.Adapter<ResortsRecycler
     }
 
 
-    public ResortsRecyclerAdapter(Context mContext, ArrayList<ResortInfo> resortList) {
+    public ResortsRecyclerAdapter(Context mContext, ArrayList<ResortInfo> resortList, ResortsAdapterListener listener) {
         this.mContext = mContext;
         this.resortList = resortList;
+        this.listener = listener;
     }
 
     @Override
@@ -91,6 +94,9 @@ public class ResortsRecyclerAdapter extends RecyclerView.Adapter<ResortsRecycler
         //        showPopupMenu(holder.resortMenu);
         //    }
         //});
+
+        // apply click events
+        applyClickEvents(holder, position);
     }
 
     /**
@@ -136,5 +142,23 @@ public class ResortsRecyclerAdapter extends RecyclerView.Adapter<ResortsRecycler
     private int dpToPx(int dp) {
 
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, mContext.getResources().getDisplayMetrics()));
+    }
+
+    //Click Listener
+    private void applyClickEvents(ResortViewHolder holder, final int position) {
+
+        holder.thumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onThumbnailClicked(position);
+            }
+        });
+
+
+    }
+
+    public interface ResortsAdapterListener {
+
+        void onThumbnailClicked(int position);
     }
 }

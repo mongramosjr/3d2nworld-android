@@ -1,17 +1,17 @@
 /*
- * Created by Mong Ramos Jr. on 12/7/17 11:47 AM
+ * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 8/29/17 3:00 PM
+ * Last modified 12/10/17 6:14 PM
  */
 
 package com.brainbox.a3d2nworld.base;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,6 +24,7 @@ import android.os.Bundle;
 
 import com.brainbox.a3d2nworld.R;
 import com.brainbox.a3d2nworld.activity.DealsActivity;
+import com.brainbox.a3d2nworld.activity.LoginActivity;
 import com.brainbox.a3d2nworld.activity.ResortsActivity;
 
 @SuppressLint("Registered")
@@ -46,7 +47,7 @@ public class BaseDrawerActivity extends AppCompatActivity
         //super.setContentView(R.layout.base_drawer_activity);
 
         //toolbar
-        //toolbar = (Toolbar) findViewById(R.id.home_toolbar);
+        //toolbar = (Toolbar) findViewById(R.id.toolbar);
         //toolbar.setLogo(R.drawable.toolbar_3d2n);
         //toolbar.setTitle("");
         //setSupportActionBar(toolbar);
@@ -62,7 +63,18 @@ public class BaseDrawerActivity extends AppCompatActivity
         //NavigationView navigationView = (NavigationView) findViewById(R.id.home_nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
 
+    }
 
+    public void enabledMenuItemSelected(Intent intent)
+    {
+        int id = intent.getIntExtra("selected_menu_id", 0);
+
+        if(navigationView == null ) return;
+
+        MenuItem item = navigationView.getMenu().findItem(id);
+        if(item != null){
+            item.setChecked(true);
+        }
     }
 
 
@@ -79,7 +91,7 @@ public class BaseDrawerActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home_toolbar, menu);
+        getMenuInflater().inflate(R.menu.toolbar, menu);
         return true;
     }
 
@@ -100,12 +112,12 @@ public class BaseDrawerActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
 
         //-- using Activity
-        Intent intent = new Intent(this, DealsActivity.class);
+        Intent intent = null;
         ActivityOptionsCompat activityOptions = null;
 
         //to prevent current item select over and over
@@ -118,20 +130,39 @@ public class BaseDrawerActivity extends AppCompatActivity
 
 
         switch(id) {
-            case R.id.nav_resorts:
+            case R.id.drawer_navigation_resorts:
                 //-- using Activity
                 intent = new Intent(this, ResortsActivity.class);
                 activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
                 break;
 
-            case R.id.nav_deals:
+            case R.id.drawer_navigation_deals:
                 intent = new Intent(this, DealsActivity.class);
                 activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
                 break;
 
-            case R.id.nav_newsletter:
+            case R.id.drawer_navigation_blogs:
 
                 break;
+
+            case R.id.drawer_navigation_profile:
+
+                break;
+
+            case R.id.drawer_navigation_vouchers:
+
+                break;
+
+            case R.id.drawer_navigation_logout:
+
+                break;
+
+            case R.id.drawer_navigation_login:
+                intent = new Intent(this, LoginActivity.class);
+                activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+
+                break;
+
 
             default:
 
@@ -144,8 +175,12 @@ public class BaseDrawerActivity extends AppCompatActivity
         // Close the navigation drawer
         drawerLayout.closeDrawer(GravityCompat.START);
 
-        //-- using Activity
-        startActivity(intent, activityOptions.toBundle());
+        if(intent != null && activityOptions != null) {
+            //intent
+            intent.putExtra("selected_menu_id", id);
+            //start activity
+            startActivity(intent, activityOptions.toBundle());
+        }
 
         return true;
     }

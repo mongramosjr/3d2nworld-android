@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 8/26/17 9:33 PM
+  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 8/26/17 2:14 PM
+  ~ Last modified 12/8/17 12:06 PM
   -->
 
 <android.support.design.widget.NavigationView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    android:id="@+id/home_nav_view"
-    android:layout_width="wrap_content"
+    android:id="@+id/navigation_view"
     android:layout_height="match_parent"
+    android:layout_width="wrap_content"
     android:layout_gravity="start"
+    app:headerLayout="@layout/navigation_drawer_header"
+    app:menu="@menu/navigation_drawer"
+
     android:fitsSystemWindows="true"
-    app:headerLayout="@layout/home_nav_header"
     app:itemTextColor="@color/colorPrimary"
     app:itemIconTint="@color/colorPrimary"
-    app:menu="@menu/home_nav_drawer">
+    >
 
 </android.support.design.widget.NavigationView>
 
