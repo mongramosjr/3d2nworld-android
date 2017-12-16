@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+ * Created by Mong Ramos Jr. on 12/17/17 7:45 AM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 12/10/17 6:14 PM
+ * Last modified 12/10/17 8:55 PM
  */
 
 package com.brainbox.a3d2nworld.base;
@@ -15,6 +15,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,16 +24,22 @@ import android.os.Bundle;
 
 
 import com.brainbox.a3d2nworld.R;
+import com.brainbox.a3d2nworld.activity.BlogsActivity;
 import com.brainbox.a3d2nworld.activity.DealsActivity;
 import com.brainbox.a3d2nworld.activity.LoginActivity;
+import com.brainbox.a3d2nworld.activity.ProfileActivity;
 import com.brainbox.a3d2nworld.activity.ResortsActivity;
+import com.brainbox.a3d2nworld.activity.VouchersActivity;
 
 @SuppressLint("Registered")
 public class BaseDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    public android.support.v7.app.ActionBar mActionBar;
 
     public DrawerLayout drawerLayout;
+    public ActionBarDrawerToggle drawerToggle;
+
     public NavigationView navigationView;
     public Toolbar toolbar;
 
@@ -142,14 +149,21 @@ public class BaseDrawerActivity extends AppCompatActivity
                 break;
 
             case R.id.drawer_navigation_blogs:
+                intent = new Intent(this, BlogsActivity.class);
+                activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
 
                 break;
 
             case R.id.drawer_navigation_profile:
+                intent = new Intent(this, ProfileActivity.class);
+                activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
 
                 break;
 
             case R.id.drawer_navigation_vouchers:
+                intent = new Intent(this, VouchersActivity.class);
+                activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+
 
                 break;
 
@@ -162,7 +176,6 @@ public class BaseDrawerActivity extends AppCompatActivity
                 activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
 
                 break;
-
 
             default:
 

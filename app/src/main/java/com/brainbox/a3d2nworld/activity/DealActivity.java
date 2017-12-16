@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+ * Created by Mong Ramos Jr. on 12/17/17 7:45 AM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 12/10/17 6:11 PM
+ * Last modified 12/10/17 8:46 PM
  */
 
 package com.brainbox.a3d2nworld.activity;
@@ -45,6 +45,8 @@ public class DealActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
+    public android.support.v7.app.ActionBar mActionBar;
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -55,11 +57,19 @@ public class DealActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.deal_activity);
 
-        Toolbar toolbar = findViewById(R.id.deal_toolbar);
-        setSupportActionBar(toolbar);
-        if(getSupportActionBar() != null ) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        //toolbar
+        //Toolbar toolbar = findViewById(R.id.resort_toolbar);
+        //setSupportActionBar(toolbar);
+        //if(getSupportActionBar() != null ) {
+        //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //}
+
+        mActionBar = getSupportActionBar();
+        mActionBar.setDisplayHomeAsUpEnabled(true);
+        //mActionBar.setHomeButtonEnabled(true);
+        mActionBar.setLogo(R.drawable.toolbar_3d2n);
+
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

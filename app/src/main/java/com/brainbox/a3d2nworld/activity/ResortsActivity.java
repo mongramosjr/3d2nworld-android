@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+ * Created by Mong Ramos Jr. on 12/17/17 7:45 AM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 12/10/17 6:12 PM
+ * Last modified 12/17/17 7:44 AM
  */
 
 package com.brainbox.a3d2nworld.activity;
@@ -64,6 +64,11 @@ public class ResortsActivity extends BaseDrawerActivity implements ResortsRecycl
         toolbar.setLogo(R.drawable.toolbar_3d2n);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
+        //mActionBar = getSupportActionBar();
+        //mActionBar.setDisplayHomeAsUpEnabled(true);
+        //mActionBar.setHomeButtonEnabled(true);
+        //mActionBar.setLogo(R.drawable.toolbar_3d2n);
 
         //drawer layout
         drawerLayout = findViewById(R.id.resorts_drawer_layout);

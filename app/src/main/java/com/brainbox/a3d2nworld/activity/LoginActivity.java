@@ -1,9 +1,9 @@
 /*
- * Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+ * Created by Mong Ramos Jr. on 12/17/17 7:45 AM
  *
  * Copyright (c) 2017 Brainbox Inc. All rights reserved.
  *
- * Last modified 12/10/17 6:00 PM
+ * Last modified 12/17/17 7:44 AM
  */
 
 package com.brainbox.a3d2nworld.activity;
@@ -11,9 +11,12 @@ package com.brainbox.a3d2nworld.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -26,6 +29,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.widget.AppCompatButton;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -102,6 +106,46 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginForm = findViewById(R.id.login_form_layout);
         mProgressBar = findViewById(R.id.login_progress);
+
+        final TextView link_signup = findViewById(R.id.link_signup);
+
+        link_signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View viewIn) {
+
+                sign_up();
+            }
+        });
+
+
+    }
+
+    private void sign_up()
+    {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+
+        if(intent != null && activityOptions != null) {
+            //intent
+            intent.putExtra("selected_menu_id", R.id.drawer_navigation_login);
+            //start activity
+            startActivity(intent, activityOptions.toBundle());
+        }
+        return;
+    }
+
+    private void forgot_password()
+    {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        ActivityOptionsCompat activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+
+        if(intent != null && activityOptions != null) {
+            //intent
+            intent.putExtra("selected_menu_id", R.id.drawer_navigation_login);
+            //start activity
+            startActivity(intent, activityOptions.toBundle());
+        }
+        return;
     }
 
     private void populateAutoComplete() {
@@ -320,7 +364,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
+                Thread.sleep(60000);
             } catch (InterruptedException e) {
                 return false;
             }

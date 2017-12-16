@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by Mong Ramos Jr. on 12/10/17 6:15 PM
+  ~ Created by Mong Ramos Jr. on 12/17/17 7:45 AM
   ~
   ~ Copyright (c) 2017 Brainbox Inc. All rights reserved.
   ~
-  ~ Last modified 12/8/17 12:06 PM
+  ~ Last modified 12/16/17 4:19 PM
   -->
 
 <android.support.design.widget.NavigationView
@@ -19,8 +19,7 @@
     app:menu="@menu/navigation_drawer"
 
     android:fitsSystemWindows="true"
-    app:itemTextColor="@color/colorPrimary"
-    app:itemIconTint="@color/colorPrimary"
+
     >
 
 </android.support.design.widget.NavigationView>
